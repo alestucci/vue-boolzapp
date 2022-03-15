@@ -21,7 +21,7 @@ html {
     background-color: #dbdbd2;
 }
 
-.window {
+#window {
     margin: 0 auto;
     width: 1536px;
     height: calc(100vh - 3rem);
