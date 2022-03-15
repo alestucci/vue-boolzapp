@@ -285,6 +285,10 @@ html {
     color: #B1B1B1;
 }
 
+.messages-input > textarea:focus::placeholder {
+    color: transparent;
+}
+
 /* STILI */
 .round {
     border-radius: 50%;
