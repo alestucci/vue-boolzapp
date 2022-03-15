@@ -138,6 +138,10 @@ html {
     border-bottom: 1px solid #E7E4E1;
 }
 
+.selected {
+    background-color: #E9EBEB;
+}
+
 .avatar-block {
     display: flex;
 }
@@ -163,19 +167,71 @@ html {
 .messages-header {
     width: 100%;
     height: 4.5rem;
+    padding: 1rem;
     background-color: #EAEAEA;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.messages-header-buttons {
+    color: #B1B1B1;
+    font-size: 20px;
+}
+
+.messages-header-buttons > * {
+    margin: 0 .5rem;
+    cursor: pointer;
 }
 
 .messages-container {
     width: 100%;
     height: calc(100% - 9rem);
     display: flex;
+    overflow: hidden;
 }
 
 .messages-main {
     width: calc(100% - 1rem);
     height: 100%;
     background-image: url(../img/mine.jpg);
+    padding: 3rem;
+}
+
+.message-row {
+    display: flex;
+}
+
+.message-row.from-user {
+    justify-content: flex-end;
+}
+
+.message-row.from-contact {
+    justify-content: flex-start;
+}
+
+.message {
+    padding: 1.2rem;
+    width: 40%;
+    border-radius: .8rem;
+    position: relative;
+    margin: .5rem 0;
+}
+
+.from-user .message {
+    background-color: #D5F9BA;
+}
+
+.from-contact .message {
+    background-color: white;
+}
+
+.message-time {
+    position: absolute;
+    right: .4rem;
+    bottom: .2rem;
+    color: #B1B1B1;
+    font-size: 10px;
 }
 
 .messages-scrollbar {
