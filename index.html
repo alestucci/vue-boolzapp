@@ -16,193 +16,137 @@
 		<title>BoolZap</title>
 	</head>
 	<body>
-        <main>
-            <div class="main-top">
-                <div id="window">
-                    <div class="contacts">
-                        <div class="contacts-header">
-                            <div class="user-avatar">
-                                <img
-                                    :src="mainUser.image"
-                                    :alt="mainUser.name"
-                                    class="header-avatar round"
-                                /><span>{{mainUser.name}}</span>
-                            </div>
-                            <div class="contacts-header-buttons">
-                                <i class="fa-solid fa-circle-notch"></i>
-                                <i class="fa-solid fa-message"></i>
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
-                            </div>
-                        </div>
-                        <div class="notifies-warning">
-                            <div class="bell round"><i class="fa-solid fa-bell-slash"></i></div>
-                            <div class="label">
-                                <div>Ricevi notifiche di nuovi messaggi</div>
-                                <div class="grey underline">Attiva notifiche desktop</div>
-                            </div>
-                        </div>
-                        <div class="contacts-search">
-                            <label for="search"
-                                ><i class="fa-solid fa-magnifying-glass"></i
-                            ></label>
-                            <input
-                                v-model="searchString"
-                                type="text"
-                                id="search"
-                                placeholder="Cerca o inizia una nuova chat"
-                            />
-                        </div>
-                        <div class="contacts-container">
-                            <div class="contacts-list">
-                                <div v-for="(person, index) in filteredContacts" class="contact" :class="(index === activeIndex) ? 'selected' : ''" @click="activeIndex = index">
-                                    <div class="avatar-block">
-                                        <img
-                                            :src="person.image"
-                                            alt="Contact Avatar"
-                                            class="contact-avatar round"
-                                        />
-                                        <div class="contact-label">
-                                            <div class="contact-name">{{ person.name }}</div>
-                                            <div class="contact-last-message grey">
-                                                Ultimo messagio inviato
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="time-last-message">
-                                        <div class="grey">12.00</div>
-                                    </div>
-                                </div>
-                                <!-- <div class="contact">
-                                    <div class="avatar-block">
-                                        <img
-                                            src="/img/avatar_1.jpg"
-                                            alt="Contact Avatar"
-                                            class="contact-avatar round"
-                                        />
-                                        <div class="contact-label">
-                                            <div class="contact-name">Michele</div>
-                                            <div class="contact-last-message grey">
-                                                Ultimo messagio inviato
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="time-last-message">
-                                        <div class="grey">12.00</div>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <div class="avatar-block">
-                                        <img
-                                            src="/img/avatar_1.jpg"
-                                            alt="Contact Avatar"
-                                            class="contact-avatar round"
-                                        />
-                                        <div class="contact-label">
-                                            <div class="contact-name">Michele</div>
-                                            <div class="contact-last-message grey">
-                                                Ultimo messagio inviato
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="time-last-message">
-                                        <div class="grey">12.00</div>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <div class="avatar-block">
-                                        <img
-                                            src="/img/avatar_1.jpg"
-                                            alt="Contact Avatar"
-                                            class="contact-avatar round"
-                                        />
-                                        <div class="contact-label">
-                                            <div class="contact-name">Michele</div>
-                                            <div class="contact-last-message grey">
-                                                Ultimo messagio inviato
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="time-last-message">
-                                        <div class="grey">12.00</div>
-                                    </div>
-                                </div>
-                                -->
-                            </div>
-                            <div class="scrollbar">
-                                <i class="fa-solid fa-caret-up"></i>
-                                <i class="fa-solid fa-caret-down"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="messages">
-                        <div class="messages-header">
-                            <div class="user-avatar">
-                                <img
-                                    :src="chatArray[activeIndex].image"
-                                    :alt="chatArray[activeIndex].name"
-                                    class="header-avatar round"
-                                />
-                                <div class="contact-label">
-                                    <div>{{chatArray[activeIndex].name}}</div>
-                                    <div class="grey">Ultimo accesso oggi alle 12:00</div>
-                                </div>
-                            </div>
-                            <div class="messages-header-buttons">
-                                <i class="fa-solid fa-magnifying-glass"></i>					<i class="fa-solid fa-paperclip"></i>
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
-                            </div>
-                        </div>
-                        <div class="messages-container">
-                            <div class="messages-main">
-                                <div v-for="message in chatArray[activeIndex].messages" class="message-row" :class="message.sent ? 'sent' : 'received'">
-                                    <div class="message">
-                                        {{ message.content}}<span class="message-time">{{ dateTransformIt(message.date) }}</span>
-                                    </div>
-                                </div>
-                                <!-- <div class="message-row from-contact">
-                                    <div class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. A deleniti, culpa ducimus modi sunt commodi inventore suscipit! Adipisci recusandae doloremque, beatae unde architecto itaque odio eligendi qui tempora, omnis dolorem.<span class="message-time">12:00</span>
-                                    </div>
-                                </div>
-                                <div class="message-row from-contact">
-                                    <div class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. A deleniti, culpa ducimus modi sunt commodi inventore suscipit! Adipisci recusandae doloremque, beatae unde architecto itaque odio eligendi qui tempora, omnis dolorem.<span class="message-time">12:00</span>
-                                    </div>
-                                </div>
-                                <div class="message-row from-user">
-                                    <div class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. A deleniti, culpa ducimus modi sunt commodi inventore suscipit! Adipisci recusandae doloremque, beatae unde architecto itaque odio eligendi qui tempora, omnis dolorem.<span class="message-time">12:00</span>
-                                    </div>
-                                </div>
-                                <div class="message-row from-user">
-                                    <div class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. A deleniti, culpa ducimus modi sunt commodi inventore suscipit! Adipisci recusandae doloremque, beatae unde architecto itaque odio eligendi qui tempora, omnis dolorem.<span class="message-time">12:00</span>
-                                    </div>
-                                </div>
-                                <div class="message-row from-contact">
-                                    <div class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. A deleniti, culpa ducimus modi sunt commodi inventore suscipit! Adipisci recusandae doloremque, beatae unde architecto itaque odio eligendi qui tempora, omnis dolorem.<span class="message-time">12:00</span>
-                                    </div>
-                                </div> -->
-                                
-                            </div>
-                            <div class="scrollbar">
-                                <i class="fa-solid fa-caret-up"></i>
-                                <i class="fa-solid fa-caret-down"></i>
-                            </div>
-                        </div>
-                        <div class="messages-input">
-                            <i class="fa-regular fa-face-smile"></i>
-                            <textarea v-model="chatArray[activeIndex].newMessage" @keyup.enter="newMessageAndReply(activeIndex)" name="" id="" cols="30" rows="10" placeholder="Scrivi un messaggio"></textarea>
-                            <i class="fa-solid fa-microphone"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="main-bottom"></div>
-        </main>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.1/build/global/luxon.min.js"></script>
-        <script src="js/script.js"></script>
+		<main>
+			<div class="main-top">
+				<div id="window">
+					<div class="contacts">
+						<div class="contacts-header">
+							<div class="user-avatar">
+								<img
+									:src="mainUser.image"
+									:alt="mainUser.name"
+									class="header-avatar round"
+								/><span>{{mainUser.name}}</span>
+							</div>
+							<div class="contacts-header-buttons">
+								<i class="fa-solid fa-circle-notch"></i>
+								<i class="fa-solid fa-message"></i>
+								<i class="fa-solid fa-ellipsis-vertical"></i>
+							</div>
+						</div>
+						<div class="notifies-warning">
+							<div class="bell round">
+								<i class="fa-solid fa-bell-slash"></i>
+							</div>
+							<div class="label">
+								<div>Ricevi notifiche di nuovi messaggi</div>
+								<div class="grey underline">Attiva notifiche desktop</div>
+							</div>
+						</div>
+						<div class="contacts-search">
+							<label for="search"
+								><i class="fa-solid fa-magnifying-glass"></i
+							></label>
+							<input
+								v-model="searchString"
+								type="text"
+								id="search"
+								placeholder="Cerca o inizia una nuova chat"
+							/>
+						</div>
+						<div class="contacts-container">
+							<div class="contacts-list">
+								<div
+									v-for="(person, index) in filteredContacts"
+									class="contact"
+									:class="(index === activeIndex) ? 'selected' : ''"
+									@click="activeIndex = index"
+								>
+									<div class="avatar-block">
+										<img
+											:src="person.image"
+											:alt="person.name"
+											class="contact-avatar round"
+										/>
+										<div class="contact-label">
+											<div class="contact-name">{{ person.name }}</div>
+											<div class="contact-last-message grey">
+												{{trimString(person.messages[person.messages.length - 1].content)}}
+											</div>
+										</div>
+									</div>
+									<div class="time-last-message">
+										<div class="grey">
+											{{dateTransformIt(person.messages[person.messages.length -
+											1].date)}}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="messages">
+						<div class="messages-header">
+							<div class="user-avatar">
+								<img
+									:src="chatArray[activeIndex].image"
+									:alt="chatArray[activeIndex].name"
+									class="header-avatar round"
+								/>
+								<div class="contact-label">
+									<div>{{chatArray[activeIndex].name}}</div>
+									<div class="grey">Ultimo accesso oggi alle 12:00</div>
+								</div>
+							</div>
+							<div class="messages-header-buttons">
+								<i class="fa-solid fa-magnifying-glass"></i>
+								<i class="fa-solid fa-paperclip"></i>
+								<i class="fa-solid fa-ellipsis-vertical"></i>
+							</div>
+						</div>
+						<div class="messages-main">
+							<div
+								v-for="(message, index) in chatArray[activeIndex].messages"
+								class="message-row"
+								:class="message.sent ? 'sent' : 'received'"
+							>
+								<div class="message">
+									<div>
+										<i
+											@click="switchMenu(index)"
+											class="fa-solid fa-chevron-down message-chevron"
+										></i>
+										<ul v-if="msgMenuActive === index" class="message-menu">
+											<li>Message Info</li>
+											<li @click="deleteMsg(index)">Delete Message</li>
+										</ul>
+									</div>
+									{{ message.content}}<span class="message-time"
+										>{{ dateTransformIt(message.date) }}</span
+									>
+								</div>
+							</div>
+						</div>
+						<div class="messages-input">
+							<i class="fa-regular fa-face-smile"></i>
+							<textarea
+								v-model="chatArray[activeIndex].newMessage"
+								@keyup.enter="newMessageAndReply(activeIndex)"
+								name=""
+								id=""
+								cols="30"
+								rows="10"
+								placeholder="Scrivi un messaggio"
+							></textarea>
+							<i class="fa-solid fa-microphone"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="main-bottom"></div>
+		</main>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/luxon@2.3.1/build/global/luxon.min.js"></script>
+		<script src="js/script.js"></script>
 	</body>
 </html>
