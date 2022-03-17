@@ -23,10 +23,10 @@
                         <div class="contacts-header">
                             <div class="user-avatar">
                                 <img
-                                    src="img/avatar_8.jpg"
-                                    alt="User Avatar"
+                                    :src="mainUser.image"
+                                    :alt="mainUser.name"
                                     class="header-avatar round"
-                                /><span>Alessandro</span>
+                                /><span>{{mainUser.name}}</span>
                             </div>
                             <div class="contacts-header-buttons">
                                 <i class="fa-solid fa-circle-notch"></i>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="contacts-container">
                             <div class="contacts-list">
-                                <div v-for="(person, index) in contactsArray" class="contact" :class="(index === contactSelected) ? 'selected' : ''" @click="contactSelected = index">
+                                <div v-for="(person, index) in chatArray" class="contact" :class="(index === activeIndex) ? 'selected' : ''" @click="activeIndex = index">
                                     <div class="avatar-block">
                                         <img
                                             :src="person.image"
@@ -137,12 +137,12 @@
                         <div class="messages-header">
                             <div class="user-avatar">
                                 <img
-                                    src="img/avatar_5.jpg"
-                                    alt="User Avatar"
+                                    :src="chatArray[activeIndex].image"
+                                    :alt="chatArray[activeIndex].name"
                                     class="header-avatar round"
                                 />
                                 <div class="contact-label">
-                                    <div>Michele</div>
+                                    <div>{{chatArray[activeIndex].name}}</div>
                                     <div class="grey">Ultimo accesso oggi alle 12:00</div>
                                 </div>
                             </div>
@@ -153,7 +153,12 @@
                         </div>
                         <div class="messages-container">
                             <div class="messages-main">
-                                <div class="message-row from-user">
+                                <div v-for="message in chatArray[activeIndex].messages" class="message-row" :class="message.sent ? 'sent' : 'received'">
+                                    <div class="message">
+                                        {{ message.content}}<span class="message-time">{{ message.date }}</span>
+                                    </div>
+                                </div>
+                                <!-- <div class="message-row from-contact">
                                     <div class="message">
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. A deleniti, culpa ducimus modi sunt commodi inventore suscipit! Adipisci recusandae doloremque, beatae unde architecto itaque odio eligendi qui tempora, omnis dolorem.<span class="message-time">12:00</span>
                                     </div>
@@ -163,11 +168,6 @@
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. A deleniti, culpa ducimus modi sunt commodi inventore suscipit! Adipisci recusandae doloremque, beatae unde architecto itaque odio eligendi qui tempora, omnis dolorem.<span class="message-time">12:00</span>
                                     </div>
                                 </div>
-                                <div class="message-row from-contact">
-                                    <div class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. A deleniti, culpa ducimus modi sunt commodi inventore suscipit! Adipisci recusandae doloremque, beatae unde architecto itaque odio eligendi qui tempora, omnis dolorem.<span class="message-time">12:00</span>
-                                    </div>
-                                </div>
                                 <div class="message-row from-user">
                                     <div class="message">
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. A deleniti, culpa ducimus modi sunt commodi inventore suscipit! Adipisci recusandae doloremque, beatae unde architecto itaque odio eligendi qui tempora, omnis dolorem.<span class="message-time">12:00</span>
@@ -182,7 +182,7 @@
                                     <div class="message">
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. A deleniti, culpa ducimus modi sunt commodi inventore suscipit! Adipisci recusandae doloremque, beatae unde architecto itaque odio eligendi qui tempora, omnis dolorem.<span class="message-time">12:00</span>
                                     </div>
-                                </div>
+                                </div> -->
                                 
                             </div>
                             <div class="scrollbar">

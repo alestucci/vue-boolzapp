@@ -143,6 +143,11 @@ html {
     cursor: pointer;
 }
 
+.contact:hover {
+    background-color: #F1F1F1;
+
+}
+
 .selected {
     background-color: #E9EBEB;
 }
@@ -218,11 +223,11 @@ html {
     display: flex;
 }
 
-.message-row.from-user {
+.message-row.sent {
     justify-content: flex-end;
 }
 
-.message-row.from-contact {
+.message-row.received {
     justify-content: flex-start;
 }
 
@@ -234,11 +239,11 @@ html {
     margin: .5rem 0;
 }
 
-.from-user .message {
+.sent .message {
     background-color: #D5F9BA;
 }
 
-.from-contact .message {
+.received .message {
     background-color: white;
 }
 
