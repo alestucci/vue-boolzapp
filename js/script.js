@@ -5,10 +5,12 @@ const app = new Vue({
 			name: "Alessandro",
 			image: "img/avatar_8.jpg",
 		},
+		activeIndex: 0,
 		chatArray: [
 			{
 				name: "Michele",
 				image: "img/avatar_1.jpg",
+				newMessage: "",
 				messages: [
 					{
 						date: "20220315T09:52:44",
@@ -35,6 +37,7 @@ const app = new Vue({
 			{
 				name: "Fabio",
 				image: "img/avatar_2.jpg",
+				newMessage: "",
 				messages: [
 					{
 						date: "20220315T09:52:44",
@@ -61,6 +64,7 @@ const app = new Vue({
 			{
 				name: "Samuele",
 				image: "img/avatar_3.jpg",
+				newMessage: "",
 				messages: [
 					{
 						date: "20220315T09:52:44",
@@ -87,6 +91,7 @@ const app = new Vue({
 			{
 				name: "Alessandro B.",
 				image: "img/avatar_4.jpg",
+				newMessage: "",
 				messages: [
 					{
 						date: "20220315T09:52:44",
@@ -113,6 +118,7 @@ const app = new Vue({
 			{
 				name: "Alessandro L.",
 				image: "img/avatar_5.jpg",
+				newMessage: "",
 				messages: [
 					{
 						date: "20220315T09:52:44",
@@ -139,6 +145,7 @@ const app = new Vue({
 			{
 				name: "Claudia",
 				image: "img/avatar_6.jpg",
+				newMessage: "",
 				messages: [
 					{
 						date: "20220315T09:52:44",
@@ -165,6 +172,7 @@ const app = new Vue({
 			{
 				name: "Federico",
 				image: "img/avatar_7.jpg",
+				newMessage: "",
 				messages: [
 					{
 						date: "20220315T09:52:44",
@@ -191,6 +199,7 @@ const app = new Vue({
 			{
 				name: "Davide",
 				image: "img/avatar_8.jpg",
+				newMessage: "",
 				messages: [
 					{
 						date: "20220315T09:52:44",
@@ -215,6 +224,33 @@ const app = new Vue({
 				],
 			},
 		],
-		activeIndex: 0,
+	},
+	methods: {
+		dateTransformIt(date) {
+			return luxon.DateTime.fromISO(date).toFormat("dd/MM/yyyy HH:mm");
+		},
+		newMessageAdd(index) {
+			const message2Insert = {
+				date: luxon.DateTime.now(),
+				content: this.chatArray[index].newMessage,
+				sent: true,
+			};
+			this.chatArray[index].messages.push(message2Insert);
+		},
+		replyMessage(index) {
+			const messageReplied = {
+				date: luxon.DateTime.now(),
+				content: "Ok!",
+				sent: false,
+			};
+			this.chatArray[index].messages.push(messageReplied);
+		},
+		newMessageAndReply(index) {
+			this.newMessageAdd(index);
+			this.chatArray[index].newMessage = "";
+			setTimeout(() => {
+				this.replyMessage(index);
+			}, 1000);
+		},
 	},
 });
