@@ -46,6 +46,7 @@
                                 ><i class="fa-solid fa-magnifying-glass"></i
                             ></label>
                             <input
+                                v-model="searchString"
                                 type="text"
                                 id="search"
                                 placeholder="Cerca o inizia una nuova chat"
@@ -53,7 +54,7 @@
                         </div>
                         <div class="contacts-container">
                             <div class="contacts-list">
-                                <div v-for="(person, index) in chatArray" class="contact" :class="(index === activeIndex) ? 'selected' : ''" @click="activeIndex = index">
+                                <div v-for="(person, index) in filteredContacts" class="contact" :class="(index === activeIndex) ? 'selected' : ''" @click="activeIndex = index">
                                     <div class="avatar-block">
                                         <img
                                             :src="person.image"

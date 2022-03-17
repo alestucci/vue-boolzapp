@@ -6,6 +6,7 @@ const app = new Vue({
 			image: "img/avatar_8.jpg",
 		},
 		activeIndex: 0,
+		searchString: "",
 		chatArray: [
 			{
 				name: "Michele",
@@ -251,6 +252,15 @@ const app = new Vue({
 			setTimeout(() => {
 				this.replyMessage(index);
 			}, 1000);
+		}
+	},
+	computed: {
+		filteredContacts() {
+			return this.chatArray.filter((contact) => {
+				return contact.name
+					.toLowerCase()
+					.includes(this.searchString.toLowerCase());
+			});
 		},
 	},
 });
